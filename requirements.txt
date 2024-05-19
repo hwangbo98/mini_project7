@@ -1,6 +1,10 @@
-mlflow
-opencv-python
-Pillow
-Django
-tensorflow-cpu
-openai
+seaborn==0.12.2
+openai==0.28
+langchain==0.1.20
+numpy
+pandas
+pymupdf
+spacy
+tiktoken
+chromadb==0.5.0
+wikipedia
