@@ -2,18 +2,17 @@
 {% block extrahead %}
 <link rel="stylesheet" href="{% static 'gtp/style.css' %}">
 {% endblock %}
-<form action="chat" method="post" entype="application/x-www-form-urlencoded">
+<form action="chatbot_chat" method="post" entype="application/x-www-form-urlencoded">
     {% csrf_token %}
     <div id="file-module-0">
         <label>chatgtp에게 요청하기</label>
-        <textarea id="question" name="question" placeholder="대화는 질문 버튼, 그림을 그려달라고 할때는 그림요청을 누르세요."></textarea>
+        <textarea id="question" name="question" ></textarea>
     </div>
     <div>
         <label>응답</label>
         <span id="result"></span>
     </div>
     <div><button id="text-button" type="button" >질문</button></div>
-    <div><button id="image-button" type="button" >그림요청</button></div>
 </form>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
@@ -27,7 +26,7 @@
         data = {'question':$('#question').val(), 'type':'text'}
         $.ajax({
             type:'POST',
-            url:'chat',
+            url:'chatbot_chat',
             data:data,
             success:function(result){
                 console.log("data pass success",result);
