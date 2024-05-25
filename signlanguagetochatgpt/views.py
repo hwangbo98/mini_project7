@@ -3,7 +3,6 @@ from django.utils import timezone
 import logging
 from django.conf import settings
 from django.core.files.storage import default_storage
-from chatgpt.views import chatGPT
 logger = logging.getLogger('mylogger')
 #signlanguage/models.py의 Result 모델을 import한다.
 from .models import ChatResult, Result
