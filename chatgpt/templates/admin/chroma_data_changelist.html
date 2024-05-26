@@ -1,0 +1,97 @@
+{% extends "admin/change_list.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{{ site_title }} | {{ _('Site administration') }}{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <h1>{{ site_header }}</h1>
+    <div id="dashboard">
+        <div class="module">
+            <h2>Custom Dashboard</h2>
+            <p>Welcome to the custom admin dashboard!</p>
+            <!-- 여기에 사용자 정의 콘텐츠 추가 -->
+        </div>
+        <div class="module">
+            <h2>Quick Actions</h2>
+            <ul>
+                <li><a href="{% url 'admin:add-texts' %}">Add Texts</a></li>
+                <li><a href="{% url 'admin:add-documents' %}">Add Documents</a></li>
+                <li><a href="{% url 'admin:upload-csv' %}">Upload CSV</a></li>
+                {% comment %} <li><a href="{% url 'admin:query-data' %}">Query Data</a></li> {% endcomment %}
+                {% comment %} <li><a href="{% url 'admin:delete-data' %}">Delete Data</a></li>  {% endcomment %}
+            </ul>
+        </div>
+        <!-- 필요에 따라 더 많은 사용자 정의 모듈을 추가할 수 있습니다. -->
+    </div>
+    <div class="module">
+        <h2>View All Data in Chroma Database</h2>
+        <form id="delete-form">
+            {% csrf_token %}
+            <button type="button" id="select-all" class="btn btn-secondary">Select All</button>
+            <button type="button" class="btn btn-danger" onclick="deleteSelected()">Delete Selected</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>ID</th>
+                        <th>Document</th>
+                        <th>Metadata</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for id, document, metadata in combined_data %}
+                        <tr>
+                            <td><input type="checkbox" name="selected_ids" value="{{ id }}"></td>
+                            <td>{{ id }}</td>
+                            <td>{{ document }}</td>
+                            <td>{{ metadata }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+<script>
+    $.ajaxSetup({
+        headers: { "X-CSRFToken": '{{ csrf_token }}' }
+    });
+
+    // 전체 선택 및 선택 해제 기능
+    $('#select-all').click(function() {
+        const checkboxes = $('input[name="selected_ids"]');
+        checkboxes.prop('checked', !checkboxes.prop('checked'));
+    });
+
+    function deleteSelected() {
+        const selectedIds = [];
+        $('input[name="selected_ids"]:checked').each(function() {
+            selectedIds.push($(this).val());
+        });
+
+        if (selectedIds.length > 0) {
+            $.ajax({
+                type: 'POST',
+                url: '{% url "admin:delete-selected" %}',
+                data: {
+                    'selected_ids[]': selectedIds
+                },
+                success: function(response) {
+                    alert(response.message);
+                    location.reload();  // 페이지 새로고침
+                },
+                error: function(xhr, errmsg, err) {
+                    console.log(xhr.status + ": " + xhr.responseText);
+                }
+            });
+        } else {
+            alert('No items selected for deletion.');
+        }
+    }
+</script>
+{% endblock %}

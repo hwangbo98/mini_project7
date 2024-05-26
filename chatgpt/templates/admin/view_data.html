@@ -1,0 +1,23 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+  <h2>View All Data in Chroma Database</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Document</th>
+        <th>Metadata</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for id, document, metadata in combined_data %}
+        <tr>
+          <td>{{ id }}</td>
+          <td>{{ document }}</td>
+          <td>{{ metadata }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
