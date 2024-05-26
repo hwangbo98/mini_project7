@@ -1,0 +1,9 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+  <h2>View All Data in Chroma Database</h2>
+  <ul>
+    {% for item in data %}
+      <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "admin/change_list.html" %}
+{% block object-tools %}
+<div class="object-tools">
+    <ul>
+        <li>
+            <a href="{% url 'admin:add-texts' %}" class="addlink">
+                Add Texts
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'admin:add-documents' %}" class="addlink">
+                Add Documents
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'admin:upload-csv' %}" class="addlink">
+                Upload CSV
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'admin:view-all' %}" class="addlink">
+                View All Data
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'admin:query-data' %}" class="addlink">
+                Query Data
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'admin:delete-data' %}" class="deletelink">
+                Delete Data
+            </a>
+        </li>
+    </ul>
+</div>
+{% endblock %}
