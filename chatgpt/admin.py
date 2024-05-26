@@ -8,18 +8,10 @@ from langchain.vectorstores import Chroma
 
 # Register your models here.
 
-# class ChromaDataAdmin(admin.ModelAdmin):
-#     list_display = ('id', 'text') 
-#     change_list_template = "admin/chroma_data_changelist.html"  #
+# History 연결
+from .models import History
 
-#     def get_urls(self):
-#         urls = super().get_urls()
-#         custom_urls = [
-#             path('view-all/', self.admin_site.admin_view(view_all_data), name='view-all'),
-#         ]
-#         return custom_urls + urls
-
-# admin.site.register(ChromaData, ChromaDataAdmin)
+admin.site.register(History)
 
 @admin.register(ChromaData)
 class ChromaDataAdmin(admin.ModelAdmin):

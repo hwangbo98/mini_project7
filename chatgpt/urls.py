@@ -11,6 +11,7 @@ urlpatterns = [
     path('chat', views.chat, name='chat'),
 
     path('simple_chatbot', views.simple_chatbot, name='simple_chatbot'),
+    path('simple_chatbot_with_history', views.simple_chatbot_with_history, name='simple_chatbot_with_history'),
 
     # path('chatbot_memory', views.chatbot_memory_form, name='chatbot_memory'),
     # path('chatbot_memory_chat', views.chatbot_memory_chat, name='chatbot_memory_chat'),
