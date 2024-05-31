@@ -8,7 +8,6 @@ from langchain.vectorstores import Chroma
 
 # Register your models here.
 
-# History 연결
 from .models import History
 
 admin.site.register(History)
@@ -35,7 +34,5 @@ class ChromaDataAdmin(admin.ModelAdmin):
             path('add-texts/', self.admin_site.admin_view(add_texts_view), name='add-texts'),
             path('add-documents/', self.admin_site.admin_view(add_documents_view), name='add-documents'),
             path('upload-csv/', self.admin_site.admin_view(upload_csv_view), name='upload-csv'),
-            # path('query-data/', self.admin_site.admin_view(query_data_view), name='query-data'),
-            # path('delete-data/', self.admin_site.admin_view(delete_data_view), name='delete-data'),
         ]
         return custom_urls + urls
