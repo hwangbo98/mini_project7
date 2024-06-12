@@ -1,4 +1,4 @@
-<!doctype html>
+{% comment %} <!doctype html>
 {% load static %}
 <html>
     <head>        
@@ -8,10 +8,43 @@
     </head>
     <body>
         <h1><a href="/">Django</a></h1>
-        <h2>김한성(a059001)</h2>
+        <h2>황보연(a051257)</h2>
         <ol>
+            <li><a href="/chatgpt/">단발성 질문, 답변 페이지</a></li>
             <li><a href="/chatgpt/">단발성 질문, 답변 페이지</a></li>
         </ol>
         <h2>Django</h2>
         <p><a href="https://www.djangoproject.com/" target="_blank">Django</a>는 Python으로 작성된 오픈 소스 웹 프레임워크로, 빠르고 쉬운 웹 개발을 가능하게 합니다.</p>
-    </body>
+    </body> {% endcomment %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django</title>
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+</head>
+<body>
+    <header>
+        <h1><a href="/">Django</a></h1>
+        <h2>황보연(a051257)</h2>
+    </header>
+    <nav>
+        <a href="/chatgpt/">단발성 질문, 답변 페이지</a><br><br>
+        <a href="/selfchatgpt/">Do you wanna Build a 황보PT?</a>
+    </nav>
+    <div class="container">
+        <h2>Django</h2>
+        <p><a href="https://www.djangoproject.com/" target="_blank">Django</a>는 Python으로 작성된 오픈 소스 웹 프레임워크로, 빠르고 쉬운 웹 개발을 가능하게 합니다.</p>
+    </div>
+    <div>
+        {% comment %} <h2> 좋아요, 구독, 알람설정까지~ </h2> {% endcomment %}
+        {% comment %} <img src="{% static 'images/peti.png' %}" alt="Django Logo" class="logo">  {% endcomment %}
+        {% comment %} <p><a href="{% url 'hg:hg' %}">Click me!!</a></p> {% endcomment %}
+    </div>
+    <footer>
+        <p>© 2024 Django Project</p>
+    </footer>
+</body>
+</html>

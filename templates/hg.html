@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Gallery</title>
+    <link rel="stylesheet" href="{% static 'hg.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Image Gallery</h1>
+    </header>
+    <div class="gallery-container">
+        <div class="image-item">
+            <img src="{% static 'images/call.png' %}" alt="Call Image">
+            <p>Call</p>
+        </div>
+        <div class="image-item">
+            <img src="{% static 'images/heart.png' %}" alt="Heart Image">
+            <p>Heat</p>
+        </div>
+        <div class="image-item">
+            <img src="{% static 'images/sleep.png' %}" alt="Sleep Image">
+            <p>Sleep</p>
+        </div>
+    </div>
+</body>
+</html>

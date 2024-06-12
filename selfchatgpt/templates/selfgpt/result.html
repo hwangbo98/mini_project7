@@ -1,0 +1,120 @@
+{% comment %} {% load static %}
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'gtp/style.css' %}">
+{% endblock %}
+<form action="chat" method="post" entype="application/x-www-form-urlencoded">
+    {% csrf_token %}
+    <div id="file-module-0">
+        <label>chatgpt에게 요청하기</label>
+        <textarea id="question" name="question">{{question}}</textarea>
+    </div>
+    <div>
+      <label>응답</label>
+      <span id="result">{{result}}</span>
+  </div>
+    <div><button id="text-button" type="submit" >질문</button></div>
+</form> {% endcomment %}
+
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Result</title>
+    <link rel="stylesheet" href="{% static '../static/gpt/style.css' %}">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            <div class="chat-message user-message">
+                <strong>Question:</strong> {{ question }}
+            </div>
+            <div class="chat-message bot-message">
+                <strong>Response:</strong> {{ result }}
+            </div>
+        </div>
+        <a href="{% url 'index' %}">Back to chat</a>
+    </div>
+</body>
+</html> {% endcomment %}
+
+
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Result</title>
+    <link rel="stylesheet" href="{% static '../static/gpt/style.css' %}">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            <div class="chat-message user-message">
+                <strong>Question:</strong> {{ question }}
+            </div>
+            <div class="chat-message bot-message">
+                <strong>Response:</strong> {{ result }}
+            </div>
+        </div>
+        <a href="{% url 'selfchatgpt:index' %}">Back to chat</a>
+    </div>
+</body>
+</html> {% endcomment %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat with GPT</title>
+    <link rel="stylesheet" href="{% static 'gpt/style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            <!-- 채팅 메시지가 여기에 추가됩니다 -->
+        </div>
+        <form id="chat-form" class="chat-input">
+            {% csrf_token %}
+            <textarea id="question" name="question" rows="1" placeholder="Enter your question here"></textarea>
+            <button id="text-button" type="submit">질문</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#chat-form').on('submit', function(event) {
+                event.preventDefault();
+                let question = $('#question').val().trim();
+                if (question === '') return;
+
+                // 사용자의 메시지를 채팅 창에 추가
+                let userMessage = $('<div class="chat-message user-message"></div>').text(question);
+                $('#chat-box').append(userMessage);
+
+                // AJAX 요청을 통해 서버로 메시지를 전송하고 응답을 받음
+                $.ajax({
+                    url: '{% url "selfchatgpt:chat" %}',
+                    method: 'POST',
+                    data: {
+                        'question': question,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function(data) {
+                        let botMessage = $('<div class="chat-message bot-message"></div>').text(data.response);
+                        $('#chat-box').append(botMessage);
+                        $('#chat-box').scrollTop($('#chat-box')[0].scrollHeight);
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+
+                $('#question').val(''); // 입력 필드를 초기화합니다.
+            });
+        });
+    </script>
+</body>
+</html>

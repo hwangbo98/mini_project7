@@ -24,6 +24,9 @@ def index(request):
 urlpatterns = [
     path('',index),
     path('chatgpt/',include('chatgpt.urls')),
+    path('hg/',include('hg.urls')),
+    path('selfchatgpt/',include('selfchatgpt.urls', namespace='selfchatgpt')),
+    path('admin/', admin.site.urls),
 ]
 
 from django.conf import settings

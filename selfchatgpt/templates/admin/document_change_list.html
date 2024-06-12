@@ -1,0 +1,9 @@
+{% extends "admin/change_list.html" %}
+{% block object-tools %}
+    <div class="object-tools">
+        <ul class="nav-item">
+            <li><a href="{% url 'admin:upload_csv' %}">Upload CSV</a></li>
+            <li><a href="{% url 'admin:view_documents' %}">View Documents</a></li>
+        </ul>
+    </div>
+{% endblock %}

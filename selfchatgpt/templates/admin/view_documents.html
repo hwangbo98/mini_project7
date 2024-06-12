@@ -1,0 +1,22 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<h2>View Documents</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Page Content</th>
+            <th>Category</th>
+            <th>Vector</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for document in documents %}
+        <tr>
+            <td>{{ document.page_content }}</td>
+            <td>{{ document.category }}</td>
+            <td>{{ document.vector|default_if_none:"No Vector" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

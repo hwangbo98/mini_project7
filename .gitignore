@@ -3,6 +3,12 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-
+*.pdf
+*.zip
+*.ipynb
 # C extensions
 *.so
+
+database/*
+db_new/*
+hg/*
