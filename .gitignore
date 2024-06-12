@@ -11,4 +11,4 @@ __pycache__/
 
 database/*
 db_new/*
-hg/*
+hg/**.ipynb
